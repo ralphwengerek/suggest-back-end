@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseSuggestApi", "CourseSuggestApi\CourseSuggestApi.csproj", "{99EA2833-1298-4EE5-A735-8AB1DA4BE60E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseSuggestApi.Tests", "CourseSuggestApi.Tests\CourseSuggestApi.Tests.csproj", "{BF3ECD17-8103-4CC5-AA99-9085398D3F0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99EA2833-1298-4EE5-A735-8AB1DA4BE60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99EA2833-1298-4EE5-A735-8AB1DA4BE60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99EA2833-1298-4EE5-A735-8AB1DA4BE60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99EA2833-1298-4EE5-A735-8AB1DA4BE60E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF3ECD17-8103-4CC5-AA99-9085398D3F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3ECD17-8103-4CC5-AA99-9085398D3F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3ECD17-8103-4CC5-AA99-9085398D3F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF3ECD17-8103-4CC5-AA99-9085398D3F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
