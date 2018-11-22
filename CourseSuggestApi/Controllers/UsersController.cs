@@ -2,44 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CourseSuggestApi.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using CourseSuggestApi.Data.Model;
+using System.Data;
 
 namespace CourseSuggestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        // GET api/values
+        private SuggestDbContext _context;
+
+        public UsersController(SuggestDbContext context){
+            _context = context;
+        }
+        // GET api/users
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<User>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Users.ToList();
         }
 
-        // GET api/values/5
+        // GET api/users/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<User> Get(int id)
         {
-            return "value";
+            var user = _context.Users.Where(u => u.UserId == id).First();
+
+            return user;
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
+
