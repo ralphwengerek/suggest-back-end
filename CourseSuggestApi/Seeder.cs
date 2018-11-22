@@ -18,10 +18,12 @@ namespace CourseSuggestApi
                 var users = new List<User>
                 {
                     new User { UserId = 1, FirstName = "John", LastName = "Doe", Age = 20, Nationality = "German" },
-                    new User { UserId = 2, FirstName = "Mike", LastName = "Merry", Age = 25, Nationality = "English" },
+                    new User { UserId = 2, FirstName = "Olga", LastName = "Ivanova", Age = 19, Nationality = "Russian" },
                     new User { UserId = 3, FirstName = "Pete", LastName = "Pratt", Age = 30, Nationality = "Polish" },
                     new User { UserId = 4, FirstName = "Barry", LastName = "Bowman", Age = 35, Nationality = "South African" },
-                    new User { UserId = 5, FirstName = "Luke", LastName = "Letterman", Age = 40, Nationality = "Estonian" }
+                    new User { UserId = 5, FirstName = "Ella", LastName = "Smithe", Age = 99, Nationality = "English" },
+                    new User { UserId = 6, FirstName = "Lyla", LastName = "Fibert", Age = 22, Nationality = "English" },
+                    new User { UserId = 7, FirstName = "Luke", LastName = "Letterman", Age = 40, Nationality = "Estonian" }
                 };
 
                 context.Users.AddRange(users);

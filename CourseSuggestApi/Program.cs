@@ -22,7 +22,6 @@ namespace CourseSuggestApi
                 var services = scope.ServiceProvider;
                 Seeder.SeedDatabase(services);
             }
-
             host.Run();
         }
 

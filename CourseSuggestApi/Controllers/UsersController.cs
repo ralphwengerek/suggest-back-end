@@ -14,25 +14,22 @@ namespace CourseSuggestApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private SuggestDbContext _context;
+        private readonly IUserRepository repository;
 
-        public UsersController(SuggestDbContext context){
-            _context = context;
-        }
+        public UsersController(IUserRepository repository) => this.repository = repository;
+
         // GET api/users
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
+        public IEnumerable<User> Get()
         {
-            return _context.Users.ToList();
+            return this.repository.GetUsers();
         }
 
         // GET api/users/5
         [HttpGet("{id}")]
-        public ActionResult<User> Get(int id)
+        public User Get(int id)
         {
-            var user = _context.Users.Where(u => u.UserId == id).First();
-
-            return user;
+            return this.repository.GetUser(id);
         }
 
     }
