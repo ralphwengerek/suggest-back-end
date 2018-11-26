@@ -14,24 +14,23 @@ namespace CourseSuggestApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository repository;
+        private readonly ISuggestionRepository repository;
 
-        public UsersController(IUserRepository repository) => this.repository = repository;
+        public UsersController(ISuggestionRepository repository) => this.repository = repository;
 
         // GET api/users
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<Poll> Get()
         {
-            return this.repository.GetUsers();
+            return this.repository.GetPollSuggestions();
         }
 
-        // GET api/users/5
-        [HttpGet("{id}")]
-        public User Get(int id)
-        {
-            return this.repository.GetUser(id);
-        }
+        public ActionResult Vote(int suggestionId, string voterId) {
 
+            this.repository.Vote(suggestionId, voterId);
+
+            return Ok();
+        }
     }
 }
 

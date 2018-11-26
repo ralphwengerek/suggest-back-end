@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace CourseSuggestApi.Data
 {
-    public class UserRepository : IUserRepository
+    public class PollRepository : IPollRepository
     {
         private readonly SuggestDbContext _context;
 
-        public UserRepository(SuggestDbContext context) => this._context = context;
+        public PollRepository(SuggestDbContext context) => this._context = context;
 
         public User GetUser(int userId)
         {
