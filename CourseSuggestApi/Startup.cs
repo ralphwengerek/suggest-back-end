@@ -25,7 +25,16 @@ namespace CourseSuggestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
+
 
             services.AddTransient<ISuggestionRepository, SuggestionRepository>();
 
@@ -43,7 +52,8 @@ namespace CourseSuggestApi
                 });
             });
 
-            services.AddCors();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,8 +69,7 @@ namespace CourseSuggestApi
             }
 
 
-            app.UseCors(builder =>
-                    builder.WithOrigins("*"));
+            app.UseCors("CorsPolicy");
 
             //app.UseHttpsRedirection();
             app.UseMvc();
