@@ -2,18 +2,19 @@ using System;
 using System.Collections.Generic;
 using CourseSuggestApi.Data.Dto;
 using CourseSuggestApi.Data.Model;
+using System.Linq;
 
 namespace CourseSuggestApi.Data
 {
     public interface ISuggestionRepository
     {
-        IEnumerable<CourseSuggestion> GetCourseSuggestions();
+        IQueryable<CourseSuggestion> GetCourseSuggestions();
 
         CourseSuggestion GetCourseSuggestion(int userId);
         
-        IEnumerable<Poll> GetPollSuggestions();
-        IEnumerable<AbilityLevel> GetAbilityLevels();
-        IEnumerable<DeliveryMethod> GetDeliveryMethods();
+        IQueryable<Poll> GetPollSuggestions();
+        IQueryable<AbilityLevel> GetAbilityLevels();
+        IQueryable<DeliveryMethod> GetDeliveryMethods();
 
         int GetVotesCountForSuggestion(int suggestionId);
 
