@@ -13,6 +13,11 @@ namespace CourseSuggestApi
         {
             var context = serviceProvider.GetService<SuggestDbContext>();
 
+            Seed(context);
+        }
+
+        public static void Seed(SuggestDbContext context){
+
             if (!context.CourseSuggestions.Any())
             {
 
@@ -44,7 +49,7 @@ namespace CourseSuggestApi
                 {
                     new CourseSuggestion {
                         CourseName = "Course 0",
-                        CourseDescription = "This is a course description", 
+                        CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
                         DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
@@ -60,8 +65,8 @@ namespace CourseSuggestApi
                         AuthorName = "Olga Ivanova",
                         AuthorRole = ""
                     },
-                    new CourseSuggestion { 
-                        CourseName = "Course 2", 
+                    new CourseSuggestion {
+                        CourseName = "Course 2",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
                         DeliveryMethod = deliveryMethods[0],
@@ -69,7 +74,7 @@ namespace CourseSuggestApi
                         AuthorName = "Pete Pratt",
                         AuthorRole = ""
                     },
-                    new CourseSuggestion { 
+                    new CourseSuggestion {
                         CourseName = "Course 3",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
@@ -78,7 +83,7 @@ namespace CourseSuggestApi
                         AuthorName = "Barry Bowman",
                         AuthorRole = ""
                     },
-                    new CourseSuggestion { 
+                    new CourseSuggestion {
                         CourseName = "Course 4",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],

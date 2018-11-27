@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CourseSuggestApi.Data;
-using CourseSuggestApi.Data.Model;
+using CourseSuggestApi.Data.Dto;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using System.Linq;
@@ -10,42 +10,73 @@ namespace CourseSuggestApi.Tests
 {
     public class UserRepositoryTests
     {
-        [Fact]
-        public void DatabaseIsSeeded()
-        {
 
+        private ISuggestionRepository GetInMemoryUserRepository()
+        {
+            var options = new DbContextOptionsBuilder<SuggestDbContext>()
+                .UseInMemoryDatabase(databaseName: "SuggestDatabase")
+                .Options;
+
+            var suggestDbContext = new SuggestDbContext(options);
+            suggestDbContext.Database.EnsureDeleted();
+            suggestDbContext.Database.EnsureCreated();
+
+
+            Seeder.Seed(suggestDbContext);
+
+
+            var repo = new SuggestionRepository(suggestDbContext);
+
+            return repo;
         }
 
+        [Fact]
+        private void GetCourseSuggestionsTest()
+        {
+            var repo = GetInMemoryUserRepository();
+            var suggestions = repo.GetPollSuggestions().ToList();
+            Assert.True(suggestions.Count > 0);
+        }
 
-        //private ISuggestionRepository GetInMemoryUserRepository()
-        //{
-        //    var options = new DbContextOptionsBuilder<SuggestDbContext>()
-        //        .UseInMemoryDatabase(databaseName: "SuggestDatabase")
-        //        .Options;
+        [Fact]
+        private void AddNewSuggestionTest()
+        {
+            var repo = GetInMemoryUserRepository();
+            var suggestions = repo.GetPollSuggestions().ToList();
+            var currentNumber = suggestions.Count();
 
-        //    var suggestDbContext = new SuggestDbContext(options);
-        //    suggestDbContext.Database.EnsureDeleted();
-        //    suggestDbContext.Database.EnsureCreated();
+            var postSuggestion = new PostCourseSuggestion
+            {
+                AbilityLevelId = 1,
+                AuthorLevel = "Level 90",
+                AuthorName = "John Smith",
+                AuthorRole = "Blacksmith",
+                CourseDescription = "Smithing fundamentals",
+                CourseName = "Smithing",
+                DeliveryMethodId = 1
+            };
 
-        //    var repo = new UserRepository(suggestDbContext);
+            repo.CreateCourseSuggestion(postSuggestion);
 
-        //    if (!repo.Context.Users.Any())
-        //    {
-        //        var users = new List<CourseSuggestion>
-        //        {
-        //            new CourseSuggestion { CourseSuggestionId = 1, CourseName = "John", CourseDescription = "Doe", Age = 20, DeliveryMethod = "German" },
-        //            new CourseSuggestion { CourseSuggestionId = 2, CourseName = "Mike", CourseDescription = "Merry", Age = 25, DeliveryMethod = "English" },
-        //            new CourseSuggestion { CourseSuggestionId = 3, CourseName = "Pete", CourseDescription = "Pratt", Age = 30, DeliveryMethod = "Polish" },
-        //            new CourseSuggestion { CourseSuggestionId = 4, CourseName = "Barry", CourseDescription = "Bowman", Age = 35, DeliveryMethod = "South African" },
-        //            new CourseSuggestion { CourseSuggestionId = 5, CourseName = "Luke", CourseDescription = "Letterman", Age = 40, DeliveryMethod = "Estonian" }
-        //        };
+            Assert.Equal(currentNumber + 1, repo.GetPollSuggestions().Count());
+        }
+        [Fact]
+        private void VoteTest() {
+            var repo = GetInMemoryUserRepository();
+            var suggestions = repo.GetPollSuggestions().ToList();
+            var poll = suggestions[2];
+            var poll2 = suggestions[3];
+            var id = poll.CourseSuggestion.CourseSuggestionId;
+            var id2 = poll2.CourseSuggestion.CourseSuggestionId;
+            var postVote = new PostVote { CourseSuggestionId = id, VoterId = "Bob" };
+            var postVote2 = new PostVote { CourseSuggestionId = id, VoterId = "Alex" };
+            var postVote3 = new PostVote { CourseSuggestionId = id2, VoterId = "Alex" };
+            repo.Vote(postVote);
+            repo.Vote(postVote2);
+            repo.Vote(postVote3);
+            Assert.Equal(2, repo.GetPollSuggestions().ToList().First((arg) => arg.CourseSuggestion.CourseSuggestionId == id).VoteCount);
+            Assert.Equal(1, repo.GetPollSuggestions().ToList().First((arg) => arg.CourseSuggestion.CourseSuggestionId == id2).VoteCount);
+        }
 
-        //        repo.Context.Users.AddRange(users);
-
-        //        repo.Context.SaveChanges();
-        //    }
-
-        //    return repo;
-        //}
     }
 }
