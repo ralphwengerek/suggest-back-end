@@ -23,7 +23,7 @@ namespace CourseSuggestApi.Controllers
         [HttpGet]
         public IEnumerable<Poll> Get()
         {
-            return this.repository.GetPollSuggestions();
+            return this.repository.GetPollSuggestions().ToList();
         }
 
         // POST api/suggestions/vote

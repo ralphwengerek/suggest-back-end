@@ -29,7 +29,7 @@ namespace CourseSuggestApi
 
             services.AddTransient<ISuggestionRepository, SuggestionRepository>();
 
-            services.AddDbContext<SuggestDbContext>(options => options.UseInMemoryDatabase("SuggestDb"));
+            services.AddDbContext<SuggestDbContext>(options => options.UseSqlite("Filename=./CourseSuggest.db"));
 
             services.AddSwaggerGen(c =>
             {

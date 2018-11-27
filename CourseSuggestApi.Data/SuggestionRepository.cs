@@ -24,6 +24,7 @@ namespace CourseSuggestApi.Data
             return this.Context.CourseSuggestions
                        .Include(cs => cs.AbilityLevel)
                        .Include(cs => cs.DeliveryMethod);
+
         }
 
         public IQueryable<DeliveryMethod> GetDeliveryMethods()
@@ -47,7 +48,7 @@ namespace CourseSuggestApi.Data
                             .Select(cs => new Poll
                             {
                                 CourseSuggestion = cs,
-                                VoteCount = this.GetVotesCountForSuggestion(cs.CourseSuggestionId)
+                                //VoteCount = this.GetVotesCountForSuggestion(cs.CourseSuggestionId)
 
                             });
         }
