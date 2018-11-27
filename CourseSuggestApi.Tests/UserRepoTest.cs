@@ -17,35 +17,35 @@ namespace CourseSuggestApi.Tests
         }
 
 
-        private IUserRepository GetInMemoryUserRepository()
-        {
-            var options = new DbContextOptionsBuilder<SuggestDbContext>()
-                .UseInMemoryDatabase(databaseName: "SuggestDatabase")
-                .Options;
+        //private ISuggestionRepository GetInMemoryUserRepository()
+        //{
+        //    var options = new DbContextOptionsBuilder<SuggestDbContext>()
+        //        .UseInMemoryDatabase(databaseName: "SuggestDatabase")
+        //        .Options;
 
-            var suggestDbContext = new SuggestDbContext(options);
-            suggestDbContext.Database.EnsureDeleted();
-            suggestDbContext.Database.EnsureCreated();
+        //    var suggestDbContext = new SuggestDbContext(options);
+        //    suggestDbContext.Database.EnsureDeleted();
+        //    suggestDbContext.Database.EnsureCreated();
 
-            var repo = new UserRepository(suggestDbContext);
+        //    var repo = new UserRepository(suggestDbContext);
 
-            if (!repo.Context.Users.Any())
-            {
-                var users = new List<User>
-                {
-                    new User { UserId = 1, FirstName = "John", LastName = "Doe", Age = 20, Nationality = "German" },
-                    new User { UserId = 2, FirstName = "Mike", LastName = "Merry", Age = 25, Nationality = "English" },
-                    new User { UserId = 3, FirstName = "Pete", LastName = "Pratt", Age = 30, Nationality = "Polish" },
-                    new User { UserId = 4, FirstName = "Barry", LastName = "Bowman", Age = 35, Nationality = "South African" },
-                    new User { UserId = 5, FirstName = "Luke", LastName = "Letterman", Age = 40, Nationality = "Estonian" }
-                };
+        //    if (!repo.Context.Users.Any())
+        //    {
+        //        var users = new List<CourseSuggestion>
+        //        {
+        //            new CourseSuggestion { CourseSuggestionId = 1, CourseName = "John", CourseDescription = "Doe", Age = 20, DeliveryMethod = "German" },
+        //            new CourseSuggestion { CourseSuggestionId = 2, CourseName = "Mike", CourseDescription = "Merry", Age = 25, DeliveryMethod = "English" },
+        //            new CourseSuggestion { CourseSuggestionId = 3, CourseName = "Pete", CourseDescription = "Pratt", Age = 30, DeliveryMethod = "Polish" },
+        //            new CourseSuggestion { CourseSuggestionId = 4, CourseName = "Barry", CourseDescription = "Bowman", Age = 35, DeliveryMethod = "South African" },
+        //            new CourseSuggestion { CourseSuggestionId = 5, CourseName = "Luke", CourseDescription = "Letterman", Age = 40, DeliveryMethod = "Estonian" }
+        //        };
 
-                repo.Context.Users.AddRange(users);
+        //        repo.Context.Users.AddRange(users);
 
-                repo.Context.SaveChanges();
-            }
+        //        repo.Context.SaveChanges();
+        //    }
 
-            return repo;
-        }
+        //    return repo;
+        //}
     }
 }

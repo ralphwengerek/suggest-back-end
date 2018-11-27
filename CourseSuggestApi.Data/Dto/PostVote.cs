@@ -6,5 +6,19 @@ namespace CourseSuggestApi.Data.Dto
         public PostVote()
         {
         }
+
+
+        public int CourseSuggestionId
+        {
+            get;
+            set;
+        }
+
+        public string VoterId
+        {
+            get;
+            set;
+        }
     }
 }
+

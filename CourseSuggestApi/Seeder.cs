@@ -13,24 +13,117 @@ namespace CourseSuggestApi
         {
             var context = serviceProvider.GetService<SuggestDbContext>();
 
-            if (!context.Users.Any())
+            if (!context.CourseSuggestions.Any())
             {
-                var users = new List<User>
-                {
-                    new User { UserId = 1, FirstName = "John", LastName = "Doe", Age = 20, Nationality = "German" },
-                    new User { UserId = 2, FirstName = "Olga", LastName = "Ivanova", Age = 19, Nationality = "Russian" },
-                    new User { UserId = 3, FirstName = "Pete", LastName = "Pratt", Age = 30, Nationality = "Polish" },
-                    new User { UserId = 4, FirstName = "Barry", LastName = "Bowman", Age = 35, Nationality = "South African" },
-                    new User { UserId = 5, FirstName = "Ella", LastName = "Smithe", Age = 99, Nationality = "English" },
-                    new User { UserId = 6, FirstName = "Lyla", LastName = "Fibert", Age = 22, Nationality = "English" },
-                    new User { UserId = 7, FirstName = "Luke", LastName = "Letterman", Age = 40, Nationality = "Estonian" }
+
+                var deliveryMethods = new List<DeliveryMethod> {
+                    new DeliveryMethod {
+                         DeliveryMethodId = 1,
+                        Description = "Workshop"
+                    },
+                    new DeliveryMethod {
+                         DeliveryMethodId = 2,
+                        Description = "Online"
+                    }
                 };
 
-                context.Users.AddRange(users);
+                context.DeliveryMethods.AddRange(deliveryMethods);
+
+                var abilityLevels = new List<AbilityLevel> {
+                    new AbilityLevel {
+                        AbilityLevelId = 1,
+                        Description = "Novice"
+                    },
+                    new AbilityLevel {
+                        AbilityLevelId = 2,
+                        Description = "Intermediate"
+                    },
+                    new AbilityLevel {
+                        AbilityLevelId = 3,
+                        Description = "Expert"
+                    }
+                };
+                context.AbilityLevels.AddRange(abilityLevels);
+
+                var users = new List<CourseSuggestion>
+                {
+                    new CourseSuggestion {
+                        CourseSuggestionId = 1, 
+                        CourseName = "Course 0",
+                        CourseDescription = "", 
+                        AbilityLevel = abilityLevels[0],
+                        DeliveryMethod = deliveryMethods[0],
+                        AuthorLevel = "",
+                        AuthorName = "John Doe",
+                        AuthorRole = ""
+                    },
+                    new CourseSuggestion {
+                        CourseSuggestionId = 2,
+                        CourseName = "Course 1",
+                        CourseDescription = "",
+                        AbilityLevel = abilityLevels[0],
+                        DeliveryMethod = deliveryMethods[0],
+                        AuthorLevel = "",
+                        AuthorName = "Olga Ivanova",
+                        AuthorRole = ""
+                    },
+                    new CourseSuggestion { 
+                        CourseSuggestionId = 3, 
+                        CourseName = "Course 2", 
+                        CourseDescription = "",
+                        AbilityLevel = abilityLevels[0],
+                        DeliveryMethod = deliveryMethods[0],
+                        AuthorLevel = "",
+                        AuthorName = "Pete Pratt",
+                        AuthorRole = ""
+                    },
+                    new CourseSuggestion { 
+                        CourseSuggestionId = 4,
+                        CourseName = "Course 3",
+                        CourseDescription = "",
+                        AbilityLevel = abilityLevels[0],
+                        DeliveryMethod = deliveryMethods[0],
+                        AuthorLevel = "",
+                        AuthorName = "Barry Bowman",
+                        AuthorRole = ""
+                    },
+                    new CourseSuggestion { 
+                        CourseSuggestionId = 5,
+                        CourseName = "Course 4",
+                        CourseDescription = "",
+                        AbilityLevel = abilityLevels[0],
+                        DeliveryMethod = deliveryMethods[0],
+                        AuthorLevel = "",
+                        AuthorName = "Ella Smithe",
+                        AuthorRole = ""
+                    },
+                    new CourseSuggestion { 
+                        CourseSuggestionId = 6,
+                        CourseName = "Course 5",
+                        CourseDescription = "",
+                        AbilityLevel = abilityLevels[0],
+                        DeliveryMethod = deliveryMethods[0],
+                        AuthorLevel = "",
+                        AuthorName = "Lyla Fibert",
+                        AuthorRole = ""
+                    },
+                    new CourseSuggestion {
+                        CourseSuggestionId = 7,
+                        CourseName = "Course 6",
+                        CourseDescription = "",
+                        AbilityLevel = abilityLevels[0],
+                        DeliveryMethod = deliveryMethods[0],
+                        AuthorLevel = "",
+                        AuthorName = "Luke Letterman",
+                        AuthorRole = ""
+                    }
+                };
+
+                context.CourseSuggestions.AddRange(users);
 
                 context.SaveChanges();
 
-               
+
             }
         }
     }

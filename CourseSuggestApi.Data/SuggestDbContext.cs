@@ -10,7 +10,10 @@ namespace CourseSuggestApi.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<CourseSuggestion> CourseSuggestions { get; set; }
+        public DbSet<AbilityLevel> AbilityLevels { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
