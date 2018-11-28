@@ -30,32 +30,37 @@ namespace CourseSuggestApi.Db.Dto
             set;
         }
 
-        [Required]
         public string AuthorName
         {
             get;
             set;
         }
 
-        [Required]
         public string AuthorRole
         {
             get;
             set;
         }
 
-        [Required]
         public string AuthorLevel
         {
             get;
             set;
         }
 
+        public bool IsRunningCourse
+        {
+            get;
+            set;
+        }
+
+        public bool IsAuthorValid => this.IsRunningCourse &&
+                                         this.AuthorName != null &&
+                                         this.AuthorRole != null &&
+                                         this.AuthorLevel != null;
+
         public bool IsValid => this.AbilityLevelId != 0 && 
                                    this.CourseName != null &&
-                                   this.CourseDescription != null && 
-                                   this.AuthorName != null &&
-                                   this.AuthorRole != null && 
-                                   this.AuthorLevel != null;
+                                   this.CourseDescription != null;
     }
 }

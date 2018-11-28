@@ -39,7 +39,7 @@ namespace CourseSuggestApi.Tests
         }
 
         [Fact]
-        private void AddNewSuggestionTest()
+        private void AddNewSuggestionWithAuthorTest()
         {
             var repo = GetInMemoryUserRepository();
             var suggestions = repo.GetPollSuggestions().ToList();
@@ -51,6 +51,7 @@ namespace CourseSuggestApi.Tests
                 AbilityLevelId = 1,
                 AuthorLevel = "Level 90",
                 AuthorName = authorName,
+                IsRunningCourse = true,
                 AuthorRole = "Blacksmith",
                 CourseDescription = "Smithing fundamentals",
                 CourseName = "Smithing"
@@ -61,6 +62,50 @@ namespace CourseSuggestApi.Tests
             Assert.Equal(currentNumber + 1, repo.GetPollSuggestions().Count());
             Assert.NotNull(repo.GetPollSuggestions().First((arg) => arg.AuthorName == authorName));
         }
+        [Fact]
+        private void AddNewSuggestioNoAuthorTest()
+        {
+            var repo = GetInMemoryUserRepository();
+            var suggestions = repo.GetPollSuggestions().ToList();
+            var currentNumber = suggestions.Count();
+
+            var courseName = "Smithing";
+            var postSuggestion = new PostCourseSuggestion
+            {
+                AbilityLevelId = 2,
+                CourseDescription = "Smithing fundamentals",
+                CourseName = courseName
+            };
+
+            var result = repo.CreateCourseSuggestion(postSuggestion);
+            Assert.True(result);
+            Assert.Equal(currentNumber + 1, repo.GetPollSuggestions().Count());
+            Assert.NotNull(repo.GetPollSuggestions().First((arg) => arg.CourseName == courseName));
+        }
+
+
+        [Fact]
+        private void AddNewSuggestioIsRunningTickedNoAuthorDetailsProvidedTest()
+        {
+
+            var repo = GetInMemoryUserRepository();
+            var suggestions = repo.GetPollSuggestions().ToList();
+            var currentNumber = suggestions.Count();
+
+            var courseName = "Modern Smithing";
+            var postSuggestion = new PostCourseSuggestion
+            {
+                AbilityLevelId = 2,
+                CourseDescription = "Smithing fundamentals",
+                CourseName = courseName,
+                IsRunningCourse = true
+            };
+
+            Assert.False(repo.CreateCourseSuggestion(postSuggestion));
+            
+            Assert.Equal(currentNumber, repo.GetPollSuggestions().Count());
+        }
+
         [Fact]
         private void VoteTest() {
             var repo = GetInMemoryUserRepository();
@@ -93,7 +138,6 @@ namespace CourseSuggestApi.Tests
             Assert.Equal(1, repo.Vote(postVote));
             Assert.Equal(1, repo.GetPollSuggestions().ToList().First((arg) => arg.CourseSuggestionId == id).VoteCount);
             Assert.Equal(-1, repo.Vote(postVote2));
-
         }
     }
 }

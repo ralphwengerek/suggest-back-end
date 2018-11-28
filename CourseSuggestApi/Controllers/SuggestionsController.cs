@@ -50,10 +50,8 @@ namespace CourseSuggestApi.Controllers
         [HttpPost]
         public ActionResult CreateSuggestion([FromBody]PostCourseSuggestion suggestion)
         {
-            if (suggestion.IsValid) {
-
-                this.repository.CreateCourseSuggestion(suggestion);
-
+            if (this.repository.CreateCourseSuggestion(suggestion))
+            {
                 return Ok(suggestion);
             }
             return BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });

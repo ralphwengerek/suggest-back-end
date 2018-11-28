@@ -19,7 +19,7 @@ namespace CourseSuggestApi.Db
 
         int Vote(PostVote vote);
 
-        void CreateCourseSuggestion(PostCourseSuggestion suggestion);
+        bool CreateCourseSuggestion(PostCourseSuggestion suggestion);
 
     }
 }

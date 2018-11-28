@@ -43,40 +43,46 @@ namespace CourseSuggestApi.Db
         {
             var votesForSuggestion = this.Context.Votes.Where((arg) => arg.CourseSuggestionId == postVote.CourseSuggestionId).ToList();
             var votesNumber = votesForSuggestion.Count((arg) => arg.VoterId == postVote.VoterId);
-            if (votesNumber > 0) {
+            if (votesNumber > 0)
+            {
                 return (int)ResponseError.ErrorCode.AlreadyVoted;
             }
-            else {
 
-                var vote = new Vote
-                {
-                    CourseSuggestionId = postVote.CourseSuggestionId.Value,
-                    VoterId = postVote.VoterId
-                };
-                this.Context.Votes.Add(vote);
-                this.Context.SaveChanges();
-                return GetVotesCountForSuggestion(postVote.CourseSuggestionId.Value);
-            }
+            var vote = new Vote
+            {
+                CourseSuggestionId = postVote.CourseSuggestionId.Value,
+                VoterId = postVote.VoterId
+            };
+            this.Context.Votes.Add(vote);
+            this.Context.SaveChanges();
+            return GetVotesCountForSuggestion(postVote.CourseSuggestionId.Value);
         }
 
        
-        public void CreateCourseSuggestion(PostCourseSuggestion suggestion)
+        public bool CreateCourseSuggestion(PostCourseSuggestion suggestion)
         {
-
-            var a = this.Context.AbilityLevels.First();
+            if (suggestion.IsRunningCourse) 
+            {
+                if (!suggestion.IsAuthorValid)
+                {
+                    return false;
+                }
+            }
 
             var courseSuggestion = new CourseSuggestion
             {
+                CourseName = suggestion.CourseName,
+                CourseDescription = suggestion.CourseDescription,
+
+                IsRunningCourse = suggestion.IsRunningCourse,
                 AuthorLevel = suggestion.AuthorLevel,
                 AuthorName = suggestion.AuthorName,
-                AuthorRole = suggestion.AuthorRole,
-                CourseName = suggestion.CourseName,
-                CourseDescription = suggestion.CourseDescription
+                AuthorRole = suggestion.AuthorRole
             };
-
             courseSuggestion.AbilityLevel = this.Context.AbilityLevels.Find(suggestion.AbilityLevelId);
             this.Context.Add(courseSuggestion);
             this.Context.SaveChanges();
+            return true;
         }
 
         public SuggestDbContext Context { get; }
