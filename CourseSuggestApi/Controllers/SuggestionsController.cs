@@ -30,23 +30,31 @@ namespace CourseSuggestApi.Controllers
         [HttpPost]
         [Route("vote")]
         public ActionResult Vote([FromBody]PostVote vote) {
-
-            var result = this.repository.Vote(vote);
-            if (result == (int)( ResponseError.ErrorCode.AlreadyVoted)) {
-                return BadRequest(new ResponseError { ErrorMessage = "You have already voted for this course suggestion.", Code = ResponseError.ErrorCode.AlreadyVoted});
+            if (vote.IsValid)
+            {
+                var result = this.repository.Vote(vote);
+                if (result == (int)ResponseError.ErrorCode.AlreadyVoted)
+                {
+                    return BadRequest(new ResponseError { ErrorMessage = "You have already voted for this course suggestion.", Code = ResponseError.ErrorCode.AlreadyVoted });
+                }
+                return Ok(new
+                {
+                    courseSuggestionId = vote.CourseSuggestionId,
+                    voteCount = result
+                });
             }
-            return Ok(new {
-                courseSuggestionId = vote.CourseSuggestionId,
-                voteCount = result
-            });
+            return BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });
+
         }
 
         [HttpPost]
         public ActionResult CreateSuggestion([FromBody]PostCourseSuggestion suggestion)
         {
-            this.repository.CreateCourseSuggestion(suggestion);
-
-            return Ok();
+            if (this.repository.CreateCourseSuggestion(suggestion))
+            {
+                return Ok(suggestion);
+            }
+            return BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });
         }
 
         [HttpGet]

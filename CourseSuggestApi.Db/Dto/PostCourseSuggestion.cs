@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace CourseSuggestApi.Db.Dto
 {
     public class PostCourseSuggestion
@@ -6,19 +8,23 @@ namespace CourseSuggestApi.Db.Dto
         public PostCourseSuggestion()
         {
         }
+
+        [Required]
         public string CourseName
         {
             get;
             set;
         }
 
+        [Required]
         public string CourseDescription
         {
             get;
             set;
         }
 
-        public int AbilityLevelId
+        [Required]
+        public int? AbilityLevelId
         {
             get;
             set;
@@ -42,5 +48,19 @@ namespace CourseSuggestApi.Db.Dto
             set;
         }
 
+        public bool IsRunningCourse
+        {
+            get;
+            set;
+        }
+
+        public bool IsAuthorValid => this.IsRunningCourse &&
+                                         this.AuthorName != null &&
+                                         this.AuthorRole != null &&
+                                         this.AuthorLevel != null;
+
+        public bool IsValid => this.AbilityLevelId != 0 && 
+                                   this.CourseName != null &&
+                                   this.CourseDescription != null;
     }
 }
