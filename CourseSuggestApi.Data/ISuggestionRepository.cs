@@ -12,13 +12,13 @@ namespace CourseSuggestApi.Data
 
         CourseSuggestion GetCourseSuggestion(int userId);
         
-        IQueryable<Poll> GetPollSuggestions();
+        IEnumerable<CourseSuggestionViewModel> GetPollSuggestions();
         IQueryable<AbilityLevel> GetAbilityLevels();
         IQueryable<DeliveryMethod> GetDeliveryMethods();
 
         int GetVotesCountForSuggestion(int suggestionId);
 
-        Vote Vote(PostVote vote);
+        int Vote(PostVote vote);
 
         void CreateCourseSuggestion(PostCourseSuggestion suggestion);
 

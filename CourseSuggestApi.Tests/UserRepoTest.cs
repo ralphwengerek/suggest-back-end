@@ -74,9 +74,25 @@ namespace CourseSuggestApi.Tests
             repo.Vote(postVote);
             repo.Vote(postVote2);
             repo.Vote(postVote3);
+
             Assert.Equal(2, repo.GetPollSuggestions().ToList().First((arg) => arg.CourseSuggestion.CourseSuggestionId == id).VoteCount);
             Assert.Equal(1, repo.GetPollSuggestions().ToList().First((arg) => arg.CourseSuggestion.CourseSuggestionId == id2).VoteCount);
         }
 
+        [Fact]
+        private void VoteForTheSameSuggestionTest()
+        {
+            var repo = GetInMemoryUserRepository();
+            var suggestions = repo.GetPollSuggestions().ToList();
+            var poll = suggestions[2];
+            var id = poll.CourseSuggestion.CourseSuggestionId;
+            var postVote = new PostVote { CourseSuggestionId = id, VoterId = "Bob" };
+            var postVote2 = new PostVote { CourseSuggestionId = id, VoterId = "Bob" };
+
+            Assert.Equal(1, repo.Vote(postVote));
+            Assert.Equal(1, repo.GetPollSuggestions().ToList().First((arg) => arg.CourseSuggestion.CourseSuggestionId == id).VoteCount);
+            Assert.Equal(-1, repo.Vote(postVote2));
+
+        }
     }
 }

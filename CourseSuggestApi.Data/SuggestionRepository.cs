@@ -4,6 +4,7 @@ using CourseSuggestApi.Data.Model;
 using System.Linq;
 using System;
 using CourseSuggestApi.Data.Dto;
+using CourseSuggestApi.Controllers.ResponseObjects;
 
 namespace CourseSuggestApi.Data
 {
@@ -13,12 +14,10 @@ namespace CourseSuggestApi.Data
 
         public CourseSuggestion GetCourseSuggestion(int suggestionId) => this.Context.CourseSuggestions
                        .Include(cs => cs.AbilityLevel)
-                       .Include(cs => cs.DeliveryMethod)
                        .FirstOrDefault(u => u.CourseSuggestionId == suggestionId);
 
         public IQueryable<CourseSuggestion> GetCourseSuggestions() => this.Context.CourseSuggestions
-                       .Include(cs => cs.AbilityLevel)
-                       .Include(cs => cs.DeliveryMethod);
+                       .Include(cs => cs.AbilityLevel);
 
         public IQueryable<DeliveryMethod> GetDeliveryMethods() => this.Context.DeliveryMethods;
 
@@ -26,25 +25,41 @@ namespace CourseSuggestApi.Data
 
         public int GetVotesCountForSuggestion(int suggestionId) => this.Context.Votes.Where(v => v.CourseSuggestionId == suggestionId).Count();
 
-        public IQueryable<Poll> GetPollSuggestions() => this.GetCourseSuggestions()
-                            .Select(cs => new Poll
+        public IEnumerable<CourseSuggestionViewModel> GetPollSuggestions() {
+            var models = this.GetCourseSuggestions()
+                            .Select(cs => new CourseSuggestionViewModel
                             {
-                                CourseSuggestion = cs,
-                                VoteCount = cs.Votes.Count
+                                AbilityLevelDescription = cs.AbilityLevel.Description,
+                                VoteCount = cs.Votes.Count,
+                                AuthorLevel = cs.AuthorLevel,
+                                AuthorRole = cs.AuthorRole,
+                                AuthorName = cs.AuthorName,
+                                CourseDescription = cs.CourseDescription,
+                                CourseName = cs.CourseName,
+                                CourseSuggestionId = cs.CourseSuggestionId
 
-                            });
+                            }).ToList();
+            return models;
+        } 
 
-        public Vote Vote(PostVote postVote)
+        public int Vote(PostVote postVote)
         {
-            var vote = new Vote
-            {
-                CourseSuggestionId = postVote.CourseSuggestionId,
-                VoterId = postVote.VoterId
-            };
-            this.Context.Votes.Add(vote);
-            this.Context.SaveChanges();
+            var votesForSuggestion = this.Context.Votes.Where((arg) => arg.CourseSuggestionId == postVote.CourseSuggestionId).ToList();
+            var votesNumber = votesForSuggestion.Count((arg) => arg.VoterId == postVote.VoterId);
+            if (votesNumber > 0) {
+                return (int)ResponseError.ErrorCode.AlreadyVoted;
+            }
+            else {
 
-            return vote;
+                var vote = new Vote
+                {
+                    CourseSuggestionId = postVote.CourseSuggestionId,
+                    VoterId = postVote.VoterId
+                };
+                this.Context.Votes.Add(vote);
+                this.Context.SaveChanges();
+                return GetVotesCountForSuggestion(postVote.CourseSuggestionId);
+            }
         }
 
        
@@ -63,7 +78,6 @@ namespace CourseSuggestApi.Data
             };
 
             courseSuggestion.AbilityLevel = this.Context.AbilityLevels.Find(suggestion.AbilityLevelId);
-            courseSuggestion.DeliveryMethod = this.Context.DeliveryMethods.Find(suggestion.DeliveryMethodId);
 
             this.Context.Add(courseSuggestion);
             this.Context.SaveChanges();

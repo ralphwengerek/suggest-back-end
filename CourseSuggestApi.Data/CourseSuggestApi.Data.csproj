@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Class1.cs" />
+    <Compile Remove="Migrations\20181127111037_InitialMigration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -18,5 +19,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="CourseSuggestApi">
+      <HintPath>..\CourseSuggestApi\bin\Debug\netcoreapp2.1\CourseSuggestApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@ using System.Collections;
 using CourseSuggestApi.Data.Model;
 using System.Data;
 using CourseSuggestApi.Data.Dto;
+using CourseSuggestApi.Controllers.ResponseObjects;
 
 namespace CourseSuggestApi.Controllers
 {
@@ -21,9 +22,9 @@ namespace CourseSuggestApi.Controllers
 
         // GET api/suggestions
         [HttpGet]
-        public IEnumerable<Poll> Get()
+        public IEnumerable<CourseSuggestionViewModel> Get()
         {
-            return this.repository.GetPollSuggestions().ToList();
+            return this.repository.GetPollSuggestions();
         }
 
         // POST api/suggestions/vote
@@ -31,9 +32,14 @@ namespace CourseSuggestApi.Controllers
         [Route("vote")]
         public ActionResult Vote([FromBody]PostVote vote) {
 
-            this.repository.Vote(vote);
-
-            return Ok();
+            var result = this.repository.Vote(vote);
+            if (result == (int)( ResponseError.ErrorCode.AlreadyVoted)) {
+                return BadRequest(new ResponseError { ErrorMessage = "You have already voted for this course suggestion.", Code = ResponseError.ErrorCode.AlreadyVoted});
+            }
+            return Ok(new {
+                courseSuggestionId = vote.CourseSuggestionId,
+                voteCount = result
+            });
         }
 
         [HttpPost]
@@ -42,13 +48,6 @@ namespace CourseSuggestApi.Controllers
             this.repository.CreateCourseSuggestion(suggestion);
 
             return Ok();
-        }
-
-        [HttpGet]
-        [Route("deliverymethods")]
-        public IEnumerable<DeliveryMethod> GetDeliveryMethods()
-        {
-            return this.repository.GetDeliveryMethods();
         }
 
         [HttpGet]

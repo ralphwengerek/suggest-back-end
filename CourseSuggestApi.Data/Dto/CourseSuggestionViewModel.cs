@@ -1,11 +1,13 @@
 using System;
 namespace CourseSuggestApi.Data.Dto
 {
-    public class PostCourseSuggestion
+    public class CourseSuggestionViewModel
     {
-        public PostCourseSuggestion()
+        public CourseSuggestionViewModel()
         {
+
         }
+
         public string CourseName
         {
             get;
@@ -18,7 +20,13 @@ namespace CourseSuggestApi.Data.Dto
             set;
         }
 
-        public int AbilityLevelId
+        public int CourseSuggestionId
+        {
+            get;
+            set;
+        }
+
+        public string AbilityLevelDescription
         {
             get;
             set;
@@ -42,5 +50,10 @@ namespace CourseSuggestApi.Data.Dto
             set;
         }
 
+        public int VoteCount
+        {
+            get;
+            set;
+        }
     }
 }

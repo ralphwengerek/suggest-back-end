@@ -10,12 +10,17 @@ namespace CourseSuggestApi.Data.Model
     {
         public CourseSuggestion()
         {
-            this.DeliveryMethod = new DeliveryMethod();
             this.AbilityLevel = new AbilityLevel();
         }
 
         [Key]
         public int CourseSuggestionId
+        {
+            get;
+            set;
+        }
+
+        public bool IsRunningCourse
         {
             get;
             set;
@@ -28,12 +33,6 @@ namespace CourseSuggestApi.Data.Model
         }
 
         public string CourseDescription
-        {
-            get;
-            set;
-        }
-
-        public DeliveryMethod DeliveryMethod
         {
             get;
             set;

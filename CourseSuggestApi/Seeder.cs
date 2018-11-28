@@ -51,7 +51,6 @@ namespace CourseSuggestApi
                         CourseName = "Course 0",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "John Doe",
                         AuthorRole = ""
@@ -60,7 +59,6 @@ namespace CourseSuggestApi
                         CourseName = "Course 1",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "Olga Ivanova",
                         AuthorRole = ""
@@ -69,7 +67,6 @@ namespace CourseSuggestApi
                         CourseName = "Course 2",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "Pete Pratt",
                         AuthorRole = ""
@@ -78,7 +75,6 @@ namespace CourseSuggestApi
                         CourseName = "Course 3",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "Barry Bowman",
                         AuthorRole = ""
@@ -87,7 +83,6 @@ namespace CourseSuggestApi
                         CourseName = "Course 4",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "Ella Smithe",
                         AuthorRole = ""
