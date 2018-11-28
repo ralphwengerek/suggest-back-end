@@ -76,11 +76,6 @@ namespace CourseSuggestApi.Data
             };
 
             courseSuggestion.AbilityLevel = this.Context.AbilityLevels.Find(suggestion.AbilityLevelId);
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 5a509cd946f546950976b39d29c534266f083f9f
             this.Context.Add(courseSuggestion);
             this.Context.SaveChanges();
         }
