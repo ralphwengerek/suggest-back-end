@@ -46,7 +46,7 @@ namespace CourseSuggestApi
                 {
                     Version = "v1",
                     Title = "User API",
-                    Description = "ASP.NET Core Web API for accessing users",
+                    Description = "ASP.NET Core Web API for accessing course suggestions",
                     TermsOfService = "None",
                     Contact = new Contact() { Name = "Team Legends", Email = "legends@and.digital", Url = "www.legends.com" }
                 });
