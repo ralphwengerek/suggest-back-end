@@ -45,11 +45,12 @@ namespace CourseSuggestApi.Tests
             var suggestions = repo.GetPollSuggestions().ToList();
             var currentNumber = suggestions.Count();
 
+            var authorName = "John Smith";
             var postSuggestion = new PostCourseSuggestion
             {
                 AbilityLevelId = 1,
                 AuthorLevel = "Level 90",
-                AuthorName = "John Smith",
+                AuthorName = authorName,
                 AuthorRole = "Blacksmith",
                 CourseDescription = "Smithing fundamentals",
                 CourseName = "Smithing"
@@ -58,6 +59,7 @@ namespace CourseSuggestApi.Tests
             repo.CreateCourseSuggestion(postSuggestion);
 
             Assert.Equal(currentNumber + 1, repo.GetPollSuggestions().Count());
+            Assert.NotNull(repo.GetPollSuggestions().First((arg) => arg.AuthorName == authorName));
         }
         [Fact]
         private void VoteTest() {

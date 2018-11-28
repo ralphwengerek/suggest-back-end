@@ -50,12 +50,12 @@ namespace CourseSuggestApi.Db
 
                 var vote = new Vote
                 {
-                    CourseSuggestionId = postVote.CourseSuggestionId,
+                    CourseSuggestionId = postVote.CourseSuggestionId.Value,
                     VoterId = postVote.VoterId
                 };
                 this.Context.Votes.Add(vote);
                 this.Context.SaveChanges();
-                return GetVotesCountForSuggestion(postVote.CourseSuggestionId);
+                return GetVotesCountForSuggestion(postVote.CourseSuggestionId.Value);
             }
         }
 
