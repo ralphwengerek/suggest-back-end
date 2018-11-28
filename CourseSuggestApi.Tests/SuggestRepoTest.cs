@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using CourseSuggestApi.Data;
-using CourseSuggestApi.Data.Dto;
+using CourseSuggestApi.Db;
+using CourseSuggestApi.Db.Dto;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using System.Linq;

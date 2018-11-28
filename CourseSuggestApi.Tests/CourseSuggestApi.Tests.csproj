@@ -11,9 +11,11 @@
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CourseSuggestApi\CourseSuggestApi.csproj" />
+    <ProjectReference Include="..\CourseSuggestApi.Db\CourseSuggestApi.Db.csproj" />
   </ItemGroup>
 </Project>
