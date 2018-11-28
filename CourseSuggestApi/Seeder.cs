@@ -21,17 +21,6 @@ namespace CourseSuggestApi
             if (!context.CourseSuggestions.Any())
             {
 
-                var deliveryMethods = new List<DeliveryMethod> {
-                    new DeliveryMethod {
-                        Description = "Workshop"
-                    },
-                    new DeliveryMethod {
-                        Description = "Online"
-                    }
-                };
-
-                context.DeliveryMethods.AddRange(deliveryMethods);
-
                 var abilityLevels = new List<AbilityLevel> {
                     new AbilityLevel {
                         Description = "Novice"

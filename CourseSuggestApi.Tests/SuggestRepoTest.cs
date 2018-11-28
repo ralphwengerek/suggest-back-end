@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CourseSuggestApi.Tests
 {
-    public class UserRepositoryTests
+    public class SuggestRepositoryTests
     {
 
         private ISuggestionRepository GetInMemoryUserRepository()

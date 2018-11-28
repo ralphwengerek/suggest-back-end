@@ -18,9 +18,7 @@ namespace CourseSuggestApi.Data
 
         public IQueryable<CourseSuggestion> GetCourseSuggestions() => this.Context.CourseSuggestions
                        .Include(cs => cs.AbilityLevel);
-
-        public IQueryable<DeliveryMethod> GetDeliveryMethods() => this.Context.DeliveryMethods;
-
+                       
         public IQueryable<AbilityLevel> GetAbilityLevels() => this.Context.AbilityLevels;
 
         public int GetVotesCountForSuggestion(int suggestionId) => this.Context.Votes.Where(v => v.CourseSuggestionId == suggestionId).Count();
@@ -78,7 +76,11 @@ namespace CourseSuggestApi.Data
             };
 
             courseSuggestion.AbilityLevel = this.Context.AbilityLevels.Find(suggestion.AbilityLevelId);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 5a509cd946f546950976b39d29c534266f083f9f
             this.Context.Add(courseSuggestion);
             this.Context.SaveChanges();
         }
