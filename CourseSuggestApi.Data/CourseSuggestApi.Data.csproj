@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Dto\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />

@@ -8,7 +8,6 @@ using System.Collections;
 using CourseSuggestApi.Data.Model;
 using System.Data;
 using CourseSuggestApi.Data.Dto;
-using CourseSuggestApi.Controllers.ResponseObjects;
 
 namespace CourseSuggestApi.Controllers
 {

@@ -4,7 +4,6 @@ using CourseSuggestApi.Data.Model;
 using System.Linq;
 using System;
 using CourseSuggestApi.Data.Dto;
-using CourseSuggestApi.Controllers.ResponseObjects;
 
 namespace CourseSuggestApi.Data
 {
