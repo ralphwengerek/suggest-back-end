@@ -45,18 +45,12 @@ namespace CourseSuggestApi.Controllers
         }
 
         [HttpGet]
-        [Route("deliverymethods")]
-        public IEnumerable<DeliveryMethod> GetDeliveryMethods()
-        {
-            return this.repository.GetDeliveryMethods();
-        }
-
-        [HttpGet]
         [Route("abilitylevels")]
         public IEnumerable<AbilityLevel> GetAbilityLevels()
         {
             return this.repository.GetAbilityLevels();
         }
+
     }
 
 

@@ -14,7 +14,6 @@ namespace CourseSuggestApi.Data
         
         IQueryable<Poll> GetPollSuggestions();
         IQueryable<AbilityLevel> GetAbilityLevels();
-        IQueryable<DeliveryMethod> GetDeliveryMethods();
 
         int GetVotesCountForSuggestion(int suggestionId);
 

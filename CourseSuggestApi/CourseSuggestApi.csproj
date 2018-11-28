@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,5 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CourseSuggestApi.Data\CourseSuggestApi.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ViewModels\SuggestViewModel.cs" />
   </ItemGroup>
 </Project>

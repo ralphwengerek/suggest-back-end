@@ -21,17 +21,6 @@ namespace CourseSuggestApi
             if (!context.CourseSuggestions.Any())
             {
 
-                var deliveryMethods = new List<DeliveryMethod> {
-                    new DeliveryMethod {
-                        Description = "Workshop"
-                    },
-                    new DeliveryMethod {
-                        Description = "Online"
-                    }
-                };
-
-                context.DeliveryMethods.AddRange(deliveryMethods);
-
                 var abilityLevels = new List<AbilityLevel> {
                     new AbilityLevel {
                         Description = "Novice"
@@ -51,7 +40,6 @@ namespace CourseSuggestApi
                         CourseName = "Course 0",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "John Doe",
                         AuthorRole = ""
@@ -60,7 +48,6 @@ namespace CourseSuggestApi
                         CourseName = "Course 1",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "Olga Ivanova",
                         AuthorRole = ""
@@ -69,29 +56,10 @@ namespace CourseSuggestApi
                         CourseName = "Course 2",
                         CourseDescription = "This is a course description",
                         AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
                         AuthorLevel = "",
                         AuthorName = "Pete Pratt",
                         AuthorRole = ""
-                    },
-                    new CourseSuggestion {
-                        CourseName = "Course 3",
-                        CourseDescription = "This is a course description",
-                        AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
-                        AuthorLevel = "",
-                        AuthorName = "Barry Bowman",
-                        AuthorRole = ""
-                    },
-                    new CourseSuggestion {
-                        CourseName = "Course 4",
-                        CourseDescription = "This is a course description",
-                        AbilityLevel = abilityLevels[0],
-                        DeliveryMethod = deliveryMethods[0],
-                        AuthorLevel = "",
-                        AuthorName = "Ella Smithe",
-                        AuthorRole = ""
-                    },
+                    }
                 };
 
                 context.CourseSuggestions.AddRange(users);
