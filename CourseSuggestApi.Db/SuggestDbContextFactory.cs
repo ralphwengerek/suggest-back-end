@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace CourseSuggestApi.Data
+namespace CourseSuggestApi.Db
 {
     public class SuggestDbContextFactory : IDesignTimeDbContextFactory<SuggestDbContext>
     {

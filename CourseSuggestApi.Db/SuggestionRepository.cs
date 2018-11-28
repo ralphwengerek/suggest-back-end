@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using CourseSuggestApi.Data.Model;
+using CourseSuggestApi.Db.Model;
 using System.Linq;
 using System;
-using CourseSuggestApi.Data.Dto;
+using CourseSuggestApi.Db.Dto;
 
-namespace CourseSuggestApi.Data
+namespace CourseSuggestApi.Db
 {
     public class SuggestionRepository : ISuggestionRepository
     {

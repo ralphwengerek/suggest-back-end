@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 
-namespace CourseSuggestApi.Data.Model
+namespace CourseSuggestApi.Db.Model
 {
     public class CourseSuggestion 
     {

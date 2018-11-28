@@ -1,9 +1,9 @@
 ﻿using System;
-using CourseSuggestApi.Data;
+using CourseSuggestApi.Db;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Collections.Generic;
-using CourseSuggestApi.Data.Model;
+using CourseSuggestApi.Db.Model;
 
 namespace CourseSuggestApi
 {

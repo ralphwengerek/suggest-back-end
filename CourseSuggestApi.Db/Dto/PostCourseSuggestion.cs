@@ -1,5 +1,5 @@
-using System;
-namespace CourseSuggestApi.Data.Dto
+﻿using System;
+namespace CourseSuggestApi.Db.Dto
 {
     public class PostCourseSuggestion
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CourseSuggestApi.Data.Model;
+using CourseSuggestApi.Db.Model;
 using System;
 using System.Collections.Generic;
-namespace CourseSuggestApi.Data
+namespace CourseSuggestApi.Db
 {
     public class SuggestDbContext : DbContext
     {

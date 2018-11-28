@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseSuggestApi.Data;
+using CourseSuggestApi.Db;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
-using CourseSuggestApi.Data.Model;
+using CourseSuggestApi.Db.Model;
 using System.Data;
-using CourseSuggestApi.Data.Dto;
+using CourseSuggestApi.Db.Dto;
 
 namespace CourseSuggestApi.Controllers
 {

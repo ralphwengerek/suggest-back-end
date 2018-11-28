@@ -1,6 +1,6 @@
-﻿using CourseSuggestApi.Data.Model;
+﻿using CourseSuggestApi.Db.Model;
 
-namespace CourseSuggestApi.Data
+namespace CourseSuggestApi.Db
 {
     public class Poll
     {

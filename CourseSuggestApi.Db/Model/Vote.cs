@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CourseSuggestApi.Data.Model
+namespace CourseSuggestApi.Db.Model
 {
     public class Vote
     {

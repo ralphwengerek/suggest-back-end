@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using CourseSuggestApi.Data.Dto;
-using CourseSuggestApi.Data.Model;
+using CourseSuggestApi.Db.Dto;
+using CourseSuggestApi.Db.Model;
 using System.Linq;
 
-namespace CourseSuggestApi.Data
+namespace CourseSuggestApi.Db
 {
     public interface ISuggestionRepository
     {

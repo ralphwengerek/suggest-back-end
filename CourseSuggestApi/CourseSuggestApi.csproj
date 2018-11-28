@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CourseSuggestApi.Data\CourseSuggestApi.Data.csproj" />
+    <ProjectReference Include="..\CourseSuggestApi.Db\CourseSuggestApi.Db.csproj" />
   </ItemGroup>
 </Project>
