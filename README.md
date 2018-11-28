@@ -1,4 +1,4 @@
-# suggest-course-frontend
+# suggest-course-backend
 
 ## Project setup
-Not sure yet...
+dotnet ef database update
