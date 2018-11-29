@@ -55,5 +55,11 @@ namespace CourseSuggestApi.Db.Dto
             get;
             set;
         }
+
+        public bool HasVoted
+        {
+            get;
+            set;
+        }
     }
 }

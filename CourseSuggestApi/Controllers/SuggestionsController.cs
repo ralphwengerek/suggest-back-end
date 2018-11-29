@@ -21,9 +21,10 @@ namespace CourseSuggestApi.Controllers
 
         // GET api/suggestions
         [HttpGet]
-        public IEnumerable<CourseSuggestionViewModel> Get()
+        [Route("{voterId}")]
+        public IEnumerable<CourseSuggestionViewModel> Get(string voterId)
         {
-            return this.repository.GetPollSuggestions();
+            return this.repository.GetPollSuggestions(voterId);
         }
 
         // POST api/suggestions/vote
@@ -35,15 +36,15 @@ namespace CourseSuggestApi.Controllers
                 var result = this.repository.Vote(vote);
                 if (result == (int)ResponseError.ErrorCode.AlreadyVoted)
                 {
-                    return BadRequest(new ResponseError { ErrorMessage = "You have already voted for this course suggestion.", Code = ResponseError.ErrorCode.AlreadyVoted });
+                    return this.BadRequest(new ResponseError { ErrorMessage = "You have already voted for this course suggestion.", Code = ResponseError.ErrorCode.AlreadyVoted });
                 }
-                return Ok(new
+                return this.Ok(new
                 {
                     courseSuggestionId = vote.CourseSuggestionId,
                     voteCount = result
                 });
             }
-            return BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });
+            return this.BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });
 
         }
 
@@ -52,9 +53,9 @@ namespace CourseSuggestApi.Controllers
         {
             if (this.repository.CreateCourseSuggestion(suggestion))
             {
-                return Ok(suggestion);
+                return this.Ok(suggestion);
             }
-            return BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });
+            return this.BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });
         }
 
         [HttpGet]

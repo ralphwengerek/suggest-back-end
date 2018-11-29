@@ -12,7 +12,7 @@ namespace CourseSuggestApi.Db
 
         CourseSuggestion GetCourseSuggestion(int userId);
         
-        IEnumerable<CourseSuggestionViewModel> GetPollSuggestions();
+        IEnumerable<CourseSuggestionViewModel> GetPollSuggestions(string voterId);
         IQueryable<AbilityLevel> GetAbilityLevels();
 
         int GetVotesCountForSuggestion(int suggestionId);

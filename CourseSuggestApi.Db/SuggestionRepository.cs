@@ -22,7 +22,7 @@ namespace CourseSuggestApi.Db
 
         public int GetVotesCountForSuggestion(int suggestionId) => this.Context.Votes.Where(v => v.CourseSuggestionId == suggestionId).Count();
 
-        public IEnumerable<CourseSuggestionViewModel> GetPollSuggestions() {
+        public IEnumerable<CourseSuggestionViewModel> GetPollSuggestions(string voterId) {
             var models = this.GetCourseSuggestions()
                             .Select(cs => new CourseSuggestionViewModel
                             {
@@ -33,9 +33,10 @@ namespace CourseSuggestApi.Db
                                 AuthorName = cs.AuthorName,
                                 CourseDescription = cs.CourseDescription,
                                 CourseName = cs.CourseName,
-                                CourseSuggestionId = cs.CourseSuggestionId
-
+                                CourseSuggestionId = cs.CourseSuggestionId,
+                                HasVoted = cs.Votes.Any((arg) => arg.VoterId == voterId)
                             }).ToList();
+
             return models;
         } 
 
