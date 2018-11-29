@@ -34,9 +34,31 @@ namespace CourseSuggestApi.Controllers
             if (vote.IsValid)
             {
                 var result = this.repository.Vote(vote);
-                if (result == (int)ResponseError.ErrorCode.AlreadyVoted)
+                if (result < 0)
                 {
                     return this.BadRequest(new ResponseError { ErrorMessage = "You have already voted for this course suggestion.", Code = ResponseError.ErrorCode.AlreadyVoted });
+                }
+                return this.Ok(new
+                {
+                    courseSuggestionId = vote.CourseSuggestionId,
+                    voteCount = result
+                });
+            }
+            return this.BadRequest(new ResponseError { ErrorMessage = "Invalid post data.", Code = ResponseError.ErrorCode.PostObjectMalformed });
+
+        }
+
+        // POST api/suggestions/vote
+        [HttpPost]
+        [Route("unvote")]
+        public ActionResult UnVote([FromBody]PostVote vote)
+        {
+            if (vote.IsValid)
+            {
+                var result = this.repository.UnVote(vote);
+                if (result < 0)
+                {
+                    return this.BadRequest(new ResponseError { ErrorMessage = "You have not voted for this course suggestion yet.", Code = ResponseError.ErrorCode.VoteDoesNotExist });
                 }
                 return this.Ok(new
                 {

@@ -21,5 +21,7 @@ namespace CourseSuggestApi.Db
 
         bool CreateCourseSuggestion(PostCourseSuggestion suggestion);
 
+        int UnVote(PostVote vote);
+
     }
 }

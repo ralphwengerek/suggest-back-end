@@ -60,7 +60,21 @@ namespace CourseSuggestApi.Db
             return this.GetVotesCountForSuggestion(postVote.CourseSuggestionId.Value);
         }
 
-       
+        public int UnVote(PostVote vote)
+        {
+            var votesForSuggestion = this.Context.Votes.Where((arg) => arg.CourseSuggestionId == vote.CourseSuggestionId).ToList();
+            var votes = votesForSuggestion.Where((arg) => arg.VoterId == vote.VoterId);
+            if (votes.Any())
+            {
+                var existingVote = votes.First();
+                this.Context.Votes.Remove(existingVote);
+                this.Context.SaveChanges();
+
+                return this.GetVotesCountForSuggestion(vote.CourseSuggestionId.Value);
+            }
+
+            return (int)ResponseError.ErrorCode.VoteDoesNotExist;
+        }
         public bool CreateCourseSuggestion(PostCourseSuggestion suggestion)
         {
             if (suggestion.IsRunningCourse) 

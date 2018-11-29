@@ -17,7 +17,8 @@ namespace CourseSuggestApi.Db.Dto
         {
             AlreadyVoted = -1,
             PostObjectMalformed = -2,
-            AuthorDetailsMissing = -3
+            AuthorDetailsMissing = -3,
+            VoteDoesNotExist = -4
         }
         public string ErrorMessage
         { 
