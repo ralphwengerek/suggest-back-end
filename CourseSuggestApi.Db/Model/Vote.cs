@@ -7,6 +7,7 @@ namespace CourseSuggestApi.Db.Model
     {
         public Vote()
         {
+            this.CreatedDate  = DateTime.UtcNow;
         }
 
         [Key]
@@ -33,5 +34,8 @@ namespace CourseSuggestApi.Db.Model
             get;
             set;
         }
+
+        public DateTime CreatedDate { get; set; }
+
     }
 }
