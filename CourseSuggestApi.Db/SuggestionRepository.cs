@@ -34,9 +34,10 @@ namespace CourseSuggestApi.Db
                                 CourseDescription = cs.CourseDescription,
                                 CourseName = cs.CourseName,
                                 CourseSuggestionId = cs.CourseSuggestionId,
-                                HasVoted = cs.Votes.Any((arg) => arg.VoterId == voterId)
-                            }).ToList();
-
+                                HasVoted = cs.Votes.Any((arg) => arg.VoterId == voterId),
+                                CreatedDate = cs.CreatedDate
+                            }).OrderByDescending(arg => arg.CreatedDate).ToList();
+            
             return models;
         } 
 
@@ -56,7 +57,7 @@ namespace CourseSuggestApi.Db
             };
             this.Context.Votes.Add(vote);
             this.Context.SaveChanges();
-            return GetVotesCountForSuggestion(postVote.CourseSuggestionId.Value);
+            return this.GetVotesCountForSuggestion(postVote.CourseSuggestionId.Value);
         }
 
        

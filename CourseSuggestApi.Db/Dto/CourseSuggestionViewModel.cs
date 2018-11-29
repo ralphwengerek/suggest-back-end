@@ -61,5 +61,11 @@ namespace CourseSuggestApi.Db.Dto
             get;
             set;
         }
+
+        public DateTime CreatedDate
+        {
+            get;
+            set;
+        }
     }
 }
